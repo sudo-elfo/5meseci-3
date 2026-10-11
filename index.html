@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Srećno 5 meseci ljublju❤️</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffe0e9, #fff0f5, #ffd6e0);
+            color: #6b2140;
+        }
+
+        .screen {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 25px 18px;
+        }
+
+        #loading {
+            display: flex;
+            position: fixed;
+            inset: 0;
+            z-index: 20;
+            background: #ffe6ee;
+            transition: opacity 0.5s ease;
+        }
+
+        .heart-loader {
+            font-size: 55px;
+            animation: heartbeat 0.8s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .card {
+            width: 100%;
+            max-width: 650px;
+            background: #ffffffd9;
+            padding: clamp(22px, 5vw, 42px);
+            border-radius: 25px;
+            box-shadow: 0 10px 35px #a7446520;
+        }
+
+        .main-icon {
+            font-size: 62px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: clamp(27px, 5vw, 40px);
+            margin: 12px 0;
+        }
+
+        .subtitle {
+            font-size: 17px;
+            color: #96546f;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            min-height: 65px;
+        }
+
+        button {
+            font-family: inherit;
+            font-size: 17px;
+            font-weight: bold;
+            padding: 15px 27px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 12px #b65a7925;
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.04);
+        }
+
+        .primary {
+            color: white;
+            background: #ed5c87;
+        }
+
+        .secondary {
+            color: #a04465;
+            background: white;
+        }
+
+        #no-button {
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress {
+            height: 8px;
+            background: #f4d1de;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 22px 0 28px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #ed5c87;
+            border-radius: 20px;
+            transition: width 0.3s ease;
+        }
+
+        .question-number {
+            color: #c04c75;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        .option {
+            width: 100%;
+            min-height: 56px;
+            color: #873653;
+            background: white;
+            border: 2px solid #f4d1de;
+            box-shadow: none;
+        }
+
+        .option:hover {
+            border-color: #ed5c87;
+            background: #fff4f8;
+        }
+
+        .option:disabled {
+            cursor: default;
+            opacity: 1;
+        }
+
+        .feedback {
+            min-height: 28px;
+            margin-top: 18px;
+            font-weight: bold;
+            color: #d94375;
+        }
+
+        .prize-title {
+            color: #d94375;
+        }
+
+        .krakow {
+            font-size: 23px;
+            line-height: 1.5;
+        }
+
+        .plan-card {
+    max-width: 1100px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 650px;
+    object-fit: contain;
+    border-radius: 18px;
+    background: transparent;
+}
+
+        .back-button {
+            margin-top: 25px;
+        }
+
+        @media (max-width: 480px) {
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery img {
+                height: 260px;
+            }
+
+            .buttons {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 0. POCETNO UCITAVANJE -->
+
+    <section id="loading" class="screen">
+        <div class="heart-loader">❤️</div>
+        <h2>Spremi se za ozbiljna pitanja...</h2>
+        <p class="subtitle">Samo trenutak...</p>
+    </section>
+
+
+    <!-- 1. PITANJE O DEJTU -->
+
+    <section id="question-screen" class="screen">
+        <div class="card">
+            <div class="main-icon">💌</div>
+            <h1>Srećno 5 meseci ljublju!</h1>
+            <h2>Da li želiš da ideš na dejt sa mnom?</h2>
+
+            <p class="subtitle">
+                Imam jedno pitanje za tebe...
+            </p>
+
+            <div class="buttons">
+                <button class="primary" onclick="startQuiz()">
+                    DA ❤️
+                </button>
+
+                <button class="secondary" id="no-button">
+                    NE 🙈
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 2. KVIZ -->
+
+    <section id="quiz-screen" class="screen">
+        <div class="card">
+            <div class="main-icon">💕</div>
+
+            <div class="question-number" id="question-number">
+                PITANJE 1 OD 3
+            </div>
+
+            <div class="progress">
+                <div
+                    class="progress-fill"
+                    id="progress-fill"
+                    style="width: 33.33%">
+                </div>
+            </div>
+
+            <h1 id="question-title"></h1>
+
+            <p class="subtitle" id="question-subtitle">
+                Idemooo dalje comaraaaa
+            </p>
+
+            <div class="options" id="options"></div>
+
+            <div class="feedback" id="feedback" aria-live="polite"></div>
+        </div>
+    </section>
+
+
+    <!-- 4. OSVOJENO PUTOVANJE -->
+
+    <section id="prize-screen" class="screen">
+        <div class="card">
+            <div class="main-icon">🎉❤️🎉</div>
+
+            <h1 class="prize-title">Čestitam!</h1>
+
+            <p class="krakow">
+                Osvojila si dejt u Krakovu! 02 - 05 decembar
+            </p>
+
+            <p class="subtitle">
+                Tvoja nagrada podrazumeva da možeš da povedeš još jednu osobu,
+nadam se da ću to biti jaaaaa.
+            </p>
+
+            <div class="buttons">
+                <button class="primary" onclick="showPlan()">
+                    Plan putovanja ✈️
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- 5. PLAN I GALERIJA SLIKA -->
+
+    <section id="plan-screen" class="screen">
+        <div class="card plan-card">
+           
+
+            <h1>Naše putovanje u Krakov</h1>
+
+            <p class="subtitle">
+                Evo kratak pregled šta ćemo da posetimo. ❤️
+		(Da uvećaš slike, klikni desni klik i Open image)
+            </p>
+<p class="subtitle">
+                Sve ilustracije sam ručno crtao u Paintu, nemoj da se smeješ!!!
+            </p>
+
+
+            <h2>Gde ćemo da se slikamo i takoo 📸</h2>
+
+            <div class="gallery">
+                <figure>
+                    <img src="images/img1.jpg" alt="Naša uspomena 1">
+                    <figcaption>Ovde smo mi kako se grlimo na trgu ❤️</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/img4.jpg" alt="Naša uspomena 2">
+                    <figcaption>Opis je na slici ❤️</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/img3.jpg" alt="Naša uspomena 3">
+                    <figcaption>Kulturno uzdizanje ❤️</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="images/img2.jpg" alt="Naša uspomena 4">
+                    <figcaption>Comaraaa hvataj me ❤️</figcaption>
+                </figure>
+		<figure>
+                    <img src="images/img5.jpg" alt="Naša uspomena 4">
+                    <figcaption>Ima se može se ❤️</figcaption>
+                </figure>
+		<figure>
+                    <img src="images/img6.jpg" alt="Naša uspomena 4">
+                    <figcaption>I ovde ćemo da se ljubimo❤️</figcaption>
+                </figure>
+		<figure>
+                    <img src="images/img8.jpg" alt="Naša uspomena 4">
+                    <figcaption>Njam njam ❤️</figcaption>
+                </figure>
+		<figure>
+                    <img src="images/img7.jpg" alt="Naša uspomena 4">
+                    <figcaption>Ko preživi pričaće (ti ćeš,  ja kroz prozor) ❤️</figcaption>
+                </figure>
+
+
+
+
+            </div>
+
+            <p class="krakow">
+                Jedva čekam! ❤️
+            </p>
+
+            <button class="secondary back-button" onclick="showPrize()">
+                ← Nazad na nagradu
+            </button>
+        </div>
+    </section>
+
+<audio id="background-music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+    <script>
+
+	
+        // ELEMENTI STRANICE
+
+        const loading = document.getElementById("loading");
+        const questionScreen =
+            document.getElementById("question-screen");
+        const quizScreen =
+            document.getElementById("quiz-screen");
+        const prizeScreen =
+            document.getElementById("prize-screen");
+        const planScreen =
+            document.getElementById("plan-screen");
+
+        const noButton = document.getElementById("no-button");
+
+
+        // POCETNO UCITAVANJE
+
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                loading.style.opacity = "0";
+
+                setTimeout(() => {
+                    loading.style.display = "none";
+                    questionScreen.style.display = "flex";
+                }, 500);
+            }, 1200);
+        });
+
+
+        // DUGME NE BEZI OD MISA
+
+        function moveNoButton() {
+            const padding = 15;
+            const width = noButton.offsetWidth;
+            const height = noButton.offsetHeight;
+
+            const maxX = Math.max(
+                padding,
+                window.innerWidth - width - padding
+            );
+
+            const maxY = Math.max(
+                padding,
+                window.innerHeight - height - padding
+            );
+
+            const x = padding + Math.random() * (maxX - padding);
+            const y = padding + Math.random() * (maxY - padding);
+
+            noButton.style.position = "fixed";
+            noButton.style.left = x + "px";
+            noButton.style.top = y + "px";
+        }
+
+        noButton.addEventListener("mouseenter", moveNoButton);
+
+        noButton.addEventListener("click", (event) => {
+            event.preventDefault();
+            moveNoButton();
+        });
+
+        noButton.addEventListener("touchstart", (event) => {
+            event.preventDefault();
+            moveNoButton();
+        }, { passive: false });
+
+
+        // PITANJA I ODGOVORI
+        // correct oznacava tacan odgovor, brojevi pocinju od nule.
+
+        const questions = [
+            {
+                title: "Ko je najbolji momak na svetu?",
+                subtitle: "Ovo bi trebalo da bude lako... 😏",
+                options: [
+                    "Aleksa ❤️",
+                    "Niko",
+                    "Ramiz zmaj 😎",
+                    "Robi"
+                ],
+                correct: 0,
+                wrongMessage: "Razmisli još jednom... 😂"
+            },
+            {
+                title: "Koga Aleksa voli najviše?",
+                subtitle: "Dobro razmisli o ovom odgovoru! 💗",
+                options: [
+                    "Anu",
+                    "Milicu",
+                    "Tamaru ❤️",
+                    "Jelenu"
+                ],
+                correct: 2,
+                wrongMessage: "Comaraaaaaaa, tebe volim najviše 🥺"
+            },
+            {
+                title: "U koji grad je Aleksa van Srbije išao najviše puta?",
+                subtitle: "Izaberi grad koji je tačan odgovor! ✈️",
+                options: [
+                    "Pariz 🇫🇷",
+                    "London 🇬🇧",
+                    "Porto 🇵🇹",
+                    "Krakov 🇵🇱"
+                ],
+                correct: 3,
+                wrongMessage: "Nije taj grad! Probaj ponovo. 😊"
+            },
+	
+	{
+    		title: "Koliko meseci danas slave Tamara i Aleksa?",
+    		subtitle: "Hvala što me trpiš nekada ❤️",
+   		 options: [
+       		 "1 mesec",
+       		 "3 dana",
+        	"5 meseci",
+        	"Sadoled"
+    ],
+    correct: 2,
+    wrongMessage: "Vaš odgovor je laž"
+}
+        ];
+
+        let currentQuestion = 0;
+        let answering = false;
+
+
+        // POCETAK KVIZA KADA SE KLIKNE DA
+
+        function startQuiz() {
+		
+const music = document.getElementById("background-music");
+music.volume = 0.35;
+
+music.play().catch(error => {
+    console.log("Muzika nije mogla automatski da počne:", error);
+});
+
+            currentQuestion = 0;
+            questionScreen.style.display = "none";
+            prizeScreen.style.display = "none";
+            planScreen.style.display = "none";
+            quizScreen.style.display = "flex";
+
+            renderQuestion();
+        }
+
+
+        // PRIKAZ PITANJA
+
+        function renderQuestion() {
+            answering = false;
+
+            const question = questions[currentQuestion];
+
+            document.getElementById("question-number").textContent =
+                `PITANJE ${currentQuestion + 1} OD ${questions.length}`;
+
+            document.getElementById("progress-fill").style.width =
+                `${((currentQuestion + 1) / questions.length) * 100}%`;
+
+            document.getElementById("question-title").textContent =
+                question.title;
+
+            document.getElementById("question-subtitle").textContent =
+                question.subtitle;
+
+            document.getElementById("feedback").textContent = "";
+
+            const optionsContainer =
+                document.getElementById("options");
+
+            optionsContainer.innerHTML = "";
+
+            question.options.forEach((option, index) => {
+                const button = document.createElement("button");
+
+                button.className = "option";
+                button.textContent = option;
+
+                button.addEventListener("click", () => {
+                    checkAnswer(index);
+                });
+
+                optionsContainer.appendChild(button);
+            });
+        }
+
+
+        // PROVERA ODGOVORA
+
+        function checkAnswer(selectedIndex) {
+            if (answering) return;
+
+            const question = questions[currentQuestion];
+            const feedback = document.getElementById("feedback");
+
+            if (selectedIndex !== question.correct) {
+                feedback.textContent = question.wrongMessage;
+                return;
+            }
+
+            answering = true;
+            feedback.textContent = "Tačan odgovor! ❤️";
+
+            const buttons =
+                document.querySelectorAll("#options .option");
+
+            buttons.forEach(button => {
+                button.disabled = true;
+            });
+
+            setTimeout(() => {
+                currentQuestion++;
+
+                if (currentQuestion < questions.length) {
+                    renderQuestion();
+                } else {
+                    showPrize();
+                }
+            }, 800);
+        }
+
+
+        // PRIKAZ NAGRADE
+
+        function showPrize() {
+            questionScreen.style.display = "none";
+            quizScreen.style.display = "none";
+            planScreen.style.display = "none";
+            prizeScreen.style.display = "flex";
+
+            window.scrollTo(0, 0);
+            document.title = "Osvojeno putovanje u Krakov ❤️";
+        }
+
+
+        // DUGME PLAN PUTOVANJA
+
+        function showPlan() {
+            prizeScreen.style.display = "none";
+            planScreen.style.display = "flex";
+
+            window.scrollTo(0, 0);
+            document.title = "Naše putovanje u Krakov ❤️";
+        }
+    </script>
+
+</body>
+</html>
